@@ -2,11 +2,13 @@
 import EdenHome from "../../Page/edenHome";
 import EdenHeader from "../../Page/edenHome";
 import EdenEvent from "../../Page/edenEvent";
+import edenSalas from "../../Page/edenSalas"; 
 
 
 const edenHome = new EdenHome();
 const edenHeader = new EdenHeader();
 const edenEvent = new EdenEvent();
+const edenSalas = new edenSalas();
 
 describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     it('Verificar subtitulos', () => {
@@ -62,5 +64,49 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
       edenHeader.getSearchSuggestion().click();
       const eventTxt = "Cosquin Rock 2024 ";
       edenEvent.getEventTitle().should("contain.text", eventTxt);
+    });
+
+    it("Validación del calendario", () => {
+      cy.visit("https://www.edenentradas.com.ar/");
+
+      const fechaActual = new Date();
+      const diaActual = fechaActual.getDate();
+      const mesActual = fechaActual.getMonth();
+      const anioActual = fechaActual.getFullYear();
+
+      const meses = [
+        "Enero", 
+        "Febrero", 
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ];
+      cy.log(diaActual); 
+    
+      edenHeader.getCalendarTitle().should("contain.text", "Septiembre", "anioActual");
+
+      edenHeader.getCalendar().find('td').each((cuadradoDia, $inx) => {
+        if($inx < diaActual){
+        cy.wrap(cuadradoDia).should("have.class", 
+        "ui-datepicker-unselectable ui-state-disabled");
+      }
+      });
+    });
+
+    it("Verificar nombre de salas", () => {
+      //cy.visit("https://www.edenentradas.com.ar/sitio/contenido/salas");
+      cy.visit("https://www.edenentradas.com.ar/");
+      edenHeader.getMenuButtons().contains("SALAS").click();
+
+       edenSalas.getSalaBlock().each((block) => {
+        cy.wrap(block).should("be.visible");
+       })
     });
   })
