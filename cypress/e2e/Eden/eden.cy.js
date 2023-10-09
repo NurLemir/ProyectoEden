@@ -2,13 +2,12 @@
 import EdenHome from "../../Page/edenHome";
 import EdenHeader from "../../Page/edenHome";
 import EdenEvent from "../../Page/edenEvent";
-import edenSalas from "../../Page/edenSalas"; 
-
+import EdenSalas from "../../Page/edenSalas"; 
 
 const edenHome = new EdenHome();
 const edenHeader = new EdenHeader();
 const edenEvent = new EdenEvent();
-const edenSalas = new edenSalas();
+const edenSalas = new EdenSalas();
 
 describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     it('Verificar subtitulos', () => {
@@ -100,13 +99,30 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
       });
     });
 
-    it("Verificar nombre de salas", () => {
+    it.only("Verificar nombre de salas", () => {
       //cy.visit("https://www.edenentradas.com.ar/sitio/contenido/salas");
       cy.visit("https://www.edenentradas.com.ar/");
       edenHeader.getMenuButtons().contains("SALAS").click();
 
-       edenSalas.getSalaBlock().each((block) => {
+       const titulosSalas = [
+        "Plaza de la Música",
+        "Sala del Rey",
+        "Refugio Guernica",
+        "Captain Blue XL",
+        "Teatro Cultural Cañada",
+        "Sala Agustín Tosco - Luz y Fuerza - B° Centro",
+        "Sala de las Américas",
+        "Studio Theater",
+        "Casa Babylon",
+       ];
+
+       //Validación de los títulos iteración por elemento
+       edenSalas.getSalaBlock().each((block, $inx) => {
         cy.wrap(block).should("be.visible");
-       })
+        cy.wrap(block).should("contain.text", titulosSalas[$inx])
+       });
+
+       //Validación de títulos por array 
+       titulosSalas.forEach((titulo, $inx) =>);
     });
   })

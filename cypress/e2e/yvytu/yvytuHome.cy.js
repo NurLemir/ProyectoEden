@@ -1,7 +1,33 @@
 /// <reference types="cypress" />
+const yvytuHome = require("../../Page/Yvytu/yvytuhome");
 
 describe ("Tests sobre la página de YVYTU", () => {
 it ("Verificar barra de navegación", () => {
-cy.visit("https://vientosdelaselva.com.ar/")
+cy.visit("https://vientosdelaselva.com.ar/");
+
+const menu = ["LA RESERVA", "CABAÑAS", "COMO LLEGAR", "CONTACTO", "DONÁ"];
+
+yvytuHome.getMenuPillButton().each((boton, indice) => {
+    cy.wrap(boton).should("have.text", menu[indice]).and("be.visible");
+});
+});
+
+it("Verficiar Barra de Navegación - Iterar en Botones", () => {
+    cy.visit("https://vientosdelaselva.com.ar/");
+
+    const menu = [
+        "",
+        "LA RESERVA",
+        "CABAÑAS",
+        "COMO LLEGAR",
+        "CONTACTO",
+        "DONÁ",
+    ];
+
+    yvytuHome.getMenuAllButton().each((boton, indice) => {
+        if (indice != 0) {
+            cy.wrap(boton).should("have.text", menu[indice]);
+        };
+    });
 });
 });
