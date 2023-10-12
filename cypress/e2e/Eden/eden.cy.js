@@ -11,10 +11,7 @@ const edenSalas = new EdenSalas();
 
 describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     beforeEach(() => {
-      //const tamPantalla = Cypress.env("viewportdesktop").device;
-      const tamPantalla = Cypress.env("viewportmobile").device;
-      cy.viewport(tamPantalla);
-      cy.visit("/");
+      cy.openWeb();
     });
     it('Verificar subtitulos', () => {
       const txtBuscar = "BUSCAR EVENTO";

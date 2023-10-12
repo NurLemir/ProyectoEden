@@ -4,10 +4,7 @@ const edenHeader2 = require("../../Page/Eden/edenHeader2");
 
 describe('Test sobre la pagina de EDEN ENTRADAS', () => {
   beforeEach(() => {
-    //const tamPantalla = Cypress.env("viewportdesktop").device;
-    const tamPantalla = Cypress.env("viewportmobile").device;
-    cy.viewport(tamPantalla);
-    cy.visit("/");
+    cy.openWeb();
   });
     it('Verificar subtitulos', () => {
       cy.visit("https://www.edenentradas.com.ar/")
