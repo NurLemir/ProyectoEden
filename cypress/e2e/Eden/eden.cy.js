@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
-import EdenHome from "../../Page/edenHome";
-import EdenHeader from "../../Page/edenHome";
-import EdenEvent from "../../Page/edenEvent";
-import EdenSalas from "../../Page/edenSalas"; 
+import EdenHome from "../../Page/Eden/edenHome";
+import EdenHeader from "../../Page/Eden/edenHome";
+import EdenEvent from "../../Page/Eden/edenEvent";
+import EdenSalas from "../../Page/Eden/edenSalas"; 
 
 const edenHome = new EdenHome();
 const edenHeader = new EdenHeader();
@@ -10,8 +10,13 @@ const edenEvent = new EdenEvent();
 const edenSalas = new EdenSalas();
 
 describe('Test sobre la pagina de EDEN ENTRADAS', () => {
+    beforeEach(() => {
+      //const tamPantalla = Cypress.env("viewportdesktop").device;
+      const tamPantalla = Cypress.env("viewportmobile").device;
+      cy.viewport(tamPantalla);
+      cy.visit("/");
+    });
     it('Verificar subtitulos', () => {
-      cy.visit("https://www.edenentradas.com.ar/")
       const txtBuscar = "BUSCAR EVENTO";
       const txtCalendar = "CALENDARIO DE EVENTOS";
 
@@ -23,7 +28,6 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     });
 
     it('Verificar Menu', () => {
-      cy.visit("https://www.edenentradas.com.ar/")
       const menuBtn = ["HOME","TODOS","AGENDA DEL FINDE","RECITALES","TEATROS","CUARTETOS","FESTIVALES","SALAS"];
 
       edenHeader.getMenuButtons().each((button, $index) => {
@@ -41,7 +45,6 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     });
 
     it("Verificar pagina de recitales", () => {
-      cy.visit("https://www.edenentradas.com.ar/");
       edenHeader.getMenuButtons().contains("RECITALES").click();
       //const newUrl = "https://www.edenentradas.com.ar/sitio/contenido/recitales"; 
       //cy.url().should("eq", newUrl);
@@ -49,7 +52,6 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     });
 
     it("Verificar Imagen de Logo", () => {
-      cy.visit("https://www.edenentradas.com.ar/");
       edenHeader.getImageLogo().should("be.visible").and("have.prop", "naturalHeight").and("be.greaterThan", 0);
       const imgSource = "https://static.edenentradas.com.ar/sitio/images/logo.gif";
       edenHeader.getImageLogo().should("have.attr", "src", imgSource);
@@ -58,7 +60,6 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     });
 
     it("Verificar el funcionamiento del buscador", () => {
-      cy.visit("https://www.edenentradas.com.ar/");
       edenHeader. getSearchInput().type("Cosquin");
       edenHeader.getSearchSuggestion().click();
       const eventTxt = "Cosquin Rock 2024 ";
@@ -66,13 +67,12 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     });
 
     it("Validación del calendario", () => {
-      cy.visit("https://www.edenentradas.com.ar/");
 
       const fechaActual = new Date();
       const diaActual = fechaActual.getDate();
       const mesActual = fechaActual.getMonth();
       const anioActual = fechaActual.getFullYear();
-
+ 
       const meses = [
         "Enero", 
         "Febrero", 
@@ -89,7 +89,7 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
       ];
       cy.log(diaActual); 
     
-      edenHeader.getCalendarTitle().should("contain.text", "Septiembre", "anioActual");
+      edenHeader.getCalendarTitle().should("contain.text", "Octubre", "anioActual");
 
       edenHeader.getCalendar().find('td').each((cuadradoDia, $inx) => {
         if($inx < diaActual){
@@ -99,9 +99,9 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
       });
     });
 
-    it.only("Verificar nombre de salas", () => {
+    it.skip("Verificar nombre de salas", () => {
       //cy.visit("https://www.edenentradas.com.ar/sitio/contenido/salas");
-      cy.visit("https://www.edenentradas.com.ar/");
+      cy.visit("/");
       edenHeader.getMenuButtons().contains("SALAS").click();
 
        const titulosSalas = [
@@ -123,6 +123,8 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
        });
 
        //Validación de títulos por array 
-       titulosSalas.forEach((titulo, $inx) =>);
+       titulosSalas.forEach((titulo, $inx) => {
+        edenSalas.getSalaBlock().eq($inx).should("contain.text", titulo);
+       });
     });
   })

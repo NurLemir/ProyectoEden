@@ -54,5 +54,4 @@ it("Verficiar Barra de Navegación - Iterar en Botones", () => {
     it.only("Verificar Imagenes de las Cabañas", () => {
         yvytuHome.getImgCabaniaYaguarete().should("have.attr", "src", "./public/images/cabana-gallery/01.png");
     });
-    
 });
