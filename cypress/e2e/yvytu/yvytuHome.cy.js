@@ -46,9 +46,13 @@ it("Verficiar Barra de Navegación - Iterar en Botones", () => {
         yvytuHome.getIrArribaButton().should("not.be.visible");
 });
 
-    it.only("Verificar Botón de Reservar", () => {
+    it("Verificar Botón de Reservar", () => {
         yvytuHome.getGenericButton().contains("Reservar").should("have.attr", "href", "https://wa.me/5493757454400").and("have.attr", "target", "_blank");
         yvytuHome.getGenericButton().contains("Reservar").should("have.css", "Background", "rgb(34, 153, 84) none repeat scroll 0% 0% / auto padding-box border-box");
     });
 
+    it.only("Verificar Imagenes de las Cabañas", () => {
+        yvytuHome.getImgCabaniaYaguarete().should("have.attr", "src", "./public/images/cabana-gallery/01.png");
+    });
+    
 });

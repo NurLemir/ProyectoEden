@@ -18,6 +18,10 @@ class YvytuHome {
     getGenericButton() {
         return cy.get("a");
     }
+
+    getImgCabaniaYaguarete() {
+        return cy.get("#slick-slide00");
+    }
 }
 
 
