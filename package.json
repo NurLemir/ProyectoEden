@@ -1,8 +1,18 @@
-{"name":"cypress","version":"1.0.0","description":"Cypress tests automatizados pero el curso de PIL","main":"index.js",
-"scripts":{"test":"text"},
-"cypress:run:eden1": "npx cypress run --e2e --browser chrome --spec cypress/e2e/EDEN/eden.cy.js",
-"keywords":["cypress","test","automation","PIL"],
-"author":"Nur","license":"ISC","devDependencies":{
+{"name":"cypress",
+"version":"1.0.0",
+"description":"Cypress tests automatizados pero el curso de PIL",
+"main":"index.js",
+"scripts":{
+    "test":"text",
+    "cypress:run:eden": "npx cypress run --e2e --browser chrome --spec cypress/e2e/Eden"
+},
+
+"keywords":[
+    "cypress","test","automation","PIL"
+],
+"author":"Nur",
+"license":"ISC",
+"devDependencies":{
 "cypress":"^12.17.4",
 "mochawesome":"^7.1.3"}
 }

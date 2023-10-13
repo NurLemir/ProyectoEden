@@ -64,7 +64,7 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
       edenEvent.getEventTitle().should("contain.text", eventTxt);
     });
 
-    it.only("Validación del calendario", () => {
+    it("Validación del calendario", () => {
       const [dia, mes, anio] = utils.getCompleteDate();
     
       edenHeader.getCalendarTitle().should("contain.text", mes, anio);

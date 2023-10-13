@@ -1,6 +1,6 @@
  class EdenSalas {
     getSalaBlock() {
-        return cy.get("#div-contenido");
+        return cy.get("div-contenido");
     }
 }
 
