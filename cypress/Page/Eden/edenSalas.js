@@ -1,6 +1,7 @@
-export default class EdenSalas {
+ class EdenSalas {
     getSalaBlock() {
-        return cy.get("div-contenido");
+        return cy.get("#div-contenido");
     }
 }
 
+export default new EdenSalas();

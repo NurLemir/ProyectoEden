@@ -3,11 +3,12 @@ import EdenHome from "../../Page/Eden/edenHome";
 import EdenHeader from "../../Page/Eden/edenHome";
 import EdenEvent from "../../Page/Eden/edenEvent";
 import EdenSalas from "../../Page/Eden/edenSalas"; 
+import utils from "../../Page/Eden/utils";
 
 const edenHome = new EdenHome();
 const edenHeader = new EdenHeader();
 const edenEvent = new EdenEvent();
-const edenSalas = new EdenSalas();
+/**const edenSalas = new EdenSalas();*/
 
 describe('Test sobre la pagina de EDEN ENTRADAS', () => {
     beforeEach(() => {
@@ -63,33 +64,13 @@ describe('Test sobre la pagina de EDEN ENTRADAS', () => {
       edenEvent.getEventTitle().should("contain.text", eventTxt);
     });
 
-    it("Validación del calendario", () => {
-
-      const fechaActual = new Date();
-      const diaActual = fechaActual.getDate();
-      const mesActual = fechaActual.getMonth();
-      const anioActual = fechaActual.getFullYear();
- 
-      const meses = [
-        "Enero", 
-        "Febrero", 
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre",
-      ];
-      cy.log(diaActual); 
+    it.only("Validación del calendario", () => {
+      const [dia, mes, anio] = utils.getCompleteDate();
     
-      edenHeader.getCalendarTitle().should("contain.text", "Octubre", "anioActual");
+      edenHeader.getCalendarTitle().should("contain.text", mes, anio);
 
       edenHeader.getCalendar().find('td').each((cuadradoDia, $inx) => {
-        if($inx < diaActual){
+        if($inx < dia){
         cy.wrap(cuadradoDia).should("have.class", 
         "ui-datepicker-unselectable ui-state-disabled");
       }
