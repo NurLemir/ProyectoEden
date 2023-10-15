@@ -10,7 +10,7 @@ const edenHeader = new EdenHeader();
 const edenEvent = new EdenEvent();
 /**const edenSalas = new EdenSalas();*/
 
-describe('Test sobre la pagina de EDEN ENTRADAS', () => {
+describe('Test sobre la pagina de EDEN ENTRADAS', { tags: '@regression'}, () => {
     beforeEach(() => {
       cy.openWeb();
     });
