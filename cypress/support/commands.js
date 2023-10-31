@@ -27,6 +27,10 @@
 const Ajv = require("ajv")
 const ajv = new Ajv() 
 
+/**
+ * Abre la URL en tamaño de pantalla desktop o mobile
+ * @method {openWeb}
+ */
 Cypress.Commands.add('openWeb', () => {
     let tamPantalla;
 
@@ -40,6 +44,13 @@ Cypress.Commands.add('openWeb', () => {
     cy.visit("/");
 });
 
+/**
+ * Valida la estructura de datos del servicio
+ * @method validarSchema 
+ * @param {String} schemaName - Nombre del archivo que está en la carpeta de fixtures/schemas 
+ * correspondiente al archivo que posee la estruct de datos del servicio que se desea validar 
+ * @param {String} servicioName - Nombre del archivo que está en la caréta de fixtures/autogenerado
+ */
 Cypress.Commands.add("validarSchema", (schemaName, servicioName) => {
 
     cy.fixture(`schemas/${schemaName}.json`).then((schema) => {
@@ -48,7 +59,7 @@ Cypress.Commands.add("validarSchema", (schemaName, servicioName) => {
             const validate = ajv.compile(schema);
             const valid = validate(dataServicio);
             if (!valid) {
-                cy.log(validate.errors);
+                cy.log((JSON.stringify(validate.errors)));
                 throw new Error(`Error en el servicio ${JSON.stringify(validate.errors)}`);
             } else {
                 cy.log(`El schema ${schemaName} se valido correctamente`);
