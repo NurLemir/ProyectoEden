@@ -67,3 +67,24 @@ Cypress.Commands.add("validarSchema", (schemaName, servicioName) => {
         });
     });      
 });
+
+/**
+ * Llama a servicio y verifica la estructura de datos
+ * @method callServiceCheck
+ * @param {String} meth - Metodo: GET/POST7PUT, etc
+ * @param {String} completeUrl - Endpoint que se desea verificar
+ * @param {String} schema - Nombre del Esquema del Servicio
+ * @param {String} fileName - Nombre del archivo que se autogenerara con la respuesta del servicio
+ */
+Cypress.Commands.add("callServiceCheck", (meth, completeUrl, schema, fileName) => {
+    cy.request( {
+        method: meth, 
+        url: completeUrl,
+    }).then((response) => {
+            cy.log(`Respuesta del servicio de ${fileName}: ${JSON.stringify(response)}`);
+        expect(response.status).to.eq(200);   
+        cy.writeFile(`cypress/fixtures/autogenerado/${fileName}.json`, 
+        response["body"]);
+        cy.validarSchema(schema, fileName);
+    });
+    });
