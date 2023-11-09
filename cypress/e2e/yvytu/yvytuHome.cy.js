@@ -51,7 +51,7 @@ it("Verficiar Barra de Navegación - Iterar en Botones", () => {
         yvytuHome.getGenericButton().contains("Reservar").should("have.css", "Background", "rgb(34, 153, 84) none repeat scroll 0% 0% / auto padding-box border-box");
     });
 
-    it.only("Verificar Imagenes de las Cabañas", () => {
+    it("Verificar Imagenes de las Cabañas", () => {
         yvytuHome.getImgCabaniaYaguarete().should("have.attr", "src", "./public/images/cabana-gallery/01.png");
     });
 });
