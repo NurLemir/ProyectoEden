@@ -47,11 +47,25 @@ it("Verficiar Barra de Navegación - Iterar en Botones", () => {
 });
 
     it("Verificar Botón de Reservar", () => {
-        yvytuHome.getGenericButton().contains("Reservar").should("have.attr", "href", "https://wa.me/5493757454400").and("have.attr", "target", "_blank");
-        yvytuHome.getGenericButton().contains("Reservar").should("have.css", "Background", "rgb(34, 153, 84) none repeat scroll 0% 0% / auto padding-box border-box");
+        yvytuHome.getGenericButton()
+        .contains("Reservar")
+        .should("have.attr", "href", "https://wa.me/5493757454400")
+        .and("have.attr", "target", "_blank");
+        yvytuHome.getGenericButton()
+        .contains("Reservar")
+        .should("have.css", 
+        "Background", 
+        "rgb(34, 153, 84) none repeat scroll 0% 0% / auto padding-box border-box");
     });
 
     it("Verificar Imagenes de las Cabañas", () => {
-        yvytuHome.getImgCabaniaYaguarete().should("have.attr", "src", "./public/images/cabana-gallery/01.png");
+        yvytuHome
+        .getImgCabaniaYaguarete()
+        .should("have.attr", "src", "./public/images/cabana-gallery/01.png")
+        .and("have.attr", "alt", "Imagen 1");
+        yvytuHome
+        .getImgCabaniaArasari()
+        .should("have.attr", "src", "./public/images/cabana-gallery/01.png")
+        .and("have.attr", "alt", "Imagen 1")
     });
 });

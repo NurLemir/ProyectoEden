@@ -22,6 +22,10 @@ class YvytuHome {
     getImgCabaniaYaguarete() {
         return cy.get("#slick-slide00");
     }
+
+    getImgCabaniaArasari() {
+        return cy.get("#slick-slide00");
+    }
 }
 
 
