@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+const { default: yvytuhome } = require("../../Page/Yvytu/yvytuhome");
 const yvytuHome = require("../../Page/Yvytu/yvytuhome");
 
 describe("Tests sobre la página de YVYTU", () => {
@@ -33,6 +34,9 @@ it("Verficiar Barra de Navegación - Iterar en Botones", () => {
     });
     });
 
+    it("Verificar Imagenes del Banner Principal", () => {
+        yvytuHome.getImagenesBanner().eq(0).should("be.visible");
+    });
     it("Verificar comportamiento del botón Ir Arriba", () => {
         yvytuHome.getIrArribaButton().should("not.be.visible");
         yvytuHome.getGenericSubtitle().contains("Conocé una historia mágica.").scrollIntoView();
@@ -58,7 +62,20 @@ it("Verficiar Barra de Navegación - Iterar en Botones", () => {
         "rgb(34, 153, 84) none repeat scroll 0% 0% / auto padding-box border-box");
     });
 
+    /*it.only("Verificar Reel de Imagenes", () => {
+        let newArray = [];
+        yvytuhome.getReelImagenes().each((imagen) => {
+            cy.wrap(imagen).invoke("attr", "src").then((texto) => {
+                cy.log(index);
+                newArray.push(texto);
+            });
+        });
+        cy.log(JSON.stringify(newArray));
+    });*/
+
     it("Verificar Imagenes de las Cabañas", () => {
+        cy.log("**Todas las imagenes tienen como texto alternativo Imagen 1**");
+        cy.log("**YVYTU-015 Error en texto alternativo**");
         yvytuHome
         .getImgCabaniaYaguarete()
         .should("have.attr", "src", "./public/images/cabana-gallery/01.png")
